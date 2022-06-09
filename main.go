@@ -1,6 +1,8 @@
 package main
 
 import (
+	"context"
+
 	"github.com/Carlsberg/configuration-fetch-action/aws"
 	"github.com/crqra/go-action/pkg/action"
 )
@@ -19,7 +21,7 @@ type AppConfigFetchAction struct {
 }
 
 func (a *AppConfigFetchAction) Run() error {
-	config, err := aws.GetConfig(a.AppName, a.ProfileName, a.Environment, a.Region)
+	config, err := aws.GetConfig(context.Background(), a.AppName, a.ProfileName, a.Environment, a.Region)
 
 	action.SetOutput("config", config)
 

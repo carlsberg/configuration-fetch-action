@@ -9,8 +9,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/appconfigdata"
 )
 
-func GetConfig(appName, profileName, env, region string) (string, error) {
-	cfg, err := awsSdkConfig(region)
+func GetConfig(ctx context.Context, appName, profileName, env, region string) (string, error) {
+	cfg, err := awsSdkConfig(ctx, region)
 	if err != nil {
 		return "", err
 	}
@@ -23,7 +23,7 @@ func GetConfig(appName, profileName, env, region string) (string, error) {
 		EnvironmentIdentifier:          &env,
 	}
 
-	session, err := appconfigClient.StartConfigurationSession(context.Background(), params)
+	session, err := appconfigClient.StartConfigurationSession(ctx, params)
 	if err != nil {
 		return "", fmt.Errorf("unable to start appconfig session: %v", err)
 	}
@@ -32,7 +32,7 @@ func GetConfig(appName, profileName, env, region string) (string, error) {
 		ConfigurationToken: session.InitialConfigurationToken,
 	}
 
-	output, err := appconfigClient.GetLatestConfiguration(context.Background(), input)
+	output, err := appconfigClient.GetLatestConfiguration(ctx, input)
 	if err != nil {
 		return "", fmt.Errorf("unable to fetch latest configuration: %v", err)
 	}
@@ -40,8 +40,8 @@ func GetConfig(appName, profileName, env, region string) (string, error) {
 	return string(output.Configuration), nil
 }
 
-func awsSdkConfig(region string) (aws.Config, error) {
-	cfg, err := config.LoadDefaultConfig(context.Background(), config.WithRegion(region))
+func awsSdkConfig(ctx context.Context, region string) (aws.Config, error) {
+	cfg, err := config.LoadDefaultConfig(ctx, config.WithRegion(region))
 	if err != nil {
 		return aws.Config{}, fmt.Errorf("unable to load SDK config, %v", err)
 	}
