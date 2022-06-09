@@ -2,10 +2,10 @@ name: "Configuration Fetch Action"
 description: "Fetch AWS AppConfig configuration files"
 author: "Juan Valdivia"
 inputs:
-  appName:
+  app-name:
     required: true
     description: "AWS AppConfig application name input"
-  profileName:
+  profile-name:
     required: true
     description: "AWS Appconfig profile input"
   env: 

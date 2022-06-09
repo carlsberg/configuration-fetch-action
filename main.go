@@ -12,8 +12,8 @@ func main() {
 }
 
 type AppConfigFetchAction struct {
-	AppName     string `action:"appName"`
-	ProfileName string `action:"profileName"`
+	AppName     string `action:"app-name"`
+	ProfileName string `action:"profile-name"`
 	Environment string `action:"env"`
 	Region      string `action:"region"`
 }
