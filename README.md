@@ -2,7 +2,8 @@
 
 > This project is powered by AWS SDK
 
-A Github Action to fetches configurations from AWS AppConfig files, powered by AWS SDK
+A Github Action that fetches configurations from AWS AppConfig files, powered by AWS SDK
+
 ## Requirements
 - AWS AppConfig Application should exist already
 - AWS Appconfig Application Configuration profile should exist already
@@ -44,7 +45,7 @@ A Github Action to fetches configurations from AWS AppConfig files, powered by A
 ```
 ### Other tips 
 
-Having repo with a previously convened directory structure can be helpfull.
+We recommend repositories to have the following directory structure: 
 Something along the following lines: 
 
 ```
