@@ -5,12 +5,11 @@
 A Github Action that fetches configurations from AWS AppConfig files, powered by AWS SDK
 
 ## Requirements
+
 - AWS AppConfig Application should exist already
 - AWS Appconfig Application Configuration profile should exist already
 - AWS AppConfig Environment should exist already
-
 - [AWS configuration](https://github.com/aws-actions/configure-aws-credentials) should be set beforehand. It is useful to have a AWS IAM secret access key pair stored in the Github Secrets with permissions to access the public API.
-
 
 ## Usage
 
@@ -18,12 +17,16 @@ A Github Action that fetches configurations from AWS AppConfig files, powered by
 
 | Input                                             | Description                                        |
 |------------------------------------------------------|-----------------------------------------------|
-| `appName`  | AWS AppConfig application name input    |
-| `profileName`  | AWS AppConfig profile name input    |
+| `app-name`  | AWS AppConfig application name input    |
+| `profile-name`  | AWS AppConfig profile name input    |
 | `env`| AWS AppConfig environment name|
 | `region`| AWS Region|
 
+### Outputs
 
+| Output                                             | Description                                        |
+|------------------------------------------------------|-----------------------------------------------|
+| `config`  | AWS AppConfig application name input    |
 
 ### Example workflow
 
@@ -38,8 +41,8 @@ A Github Action that fetches configurations from AWS AppConfig files, powered by
   - name: Fetch AWS AppConfig content
     uses: carlsberg/configuration-fetch-action@main
     with:
-      appName: "beer-application"
-      profileName: "beer-delivery-service"
+      app-name: "beer-application"
+      profile-name: "beer-delivery-service"
       env: "dev"
       region: "eu-west-1"
 ```
