@@ -45,7 +45,7 @@ A Github Action that fetches configurations from AWS AppConfig files, powered by
 ```
 ### Other tips 
 
-Having repo with a previously convened directory structure can be helpfull.
+We recommend repositories to have the following directory structure: 
 Something along the following lines: 
 
 ```
