@@ -1,0 +1,29 @@
+name: "Configuration Fetch Action"
+description: "Fetch AWS AppConfig configuration files"
+author: "Juan Valdivia"
+inputs:
+  app-name:
+    required: true
+    description: "AWS AppConfig application name input"
+  profile-name:
+    required: true
+    description: "AWS Appconfig profile input"
+  env: 
+    required: true
+    description: "AWS AppConfig environment name"
+  region: 
+    required: true
+    description: "AWS Region"
+outputs:
+  config:
+    description: "Random number"
+    value: ${{ steps.action.outputs.config }}
+
+runs:
+  using: composite
+  steps:
+    - id: action
+      run: go run main.go -inputs '${{ toJSON(inputs) }}'
+      working-directory: ${{ github.action_path }}
+      shell: bash
+
