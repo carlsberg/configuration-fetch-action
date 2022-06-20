@@ -2,9 +2,12 @@ package main
 
 import (
 	"context"
+	"fmt"
+	"strings"
 
 	"github.com/Carlsberg/configuration-fetch-action/aws"
 	"github.com/crqra/go-action/pkg/action"
+	"github.com/itchyny/gojq"
 )
 
 func main() {
@@ -22,8 +25,32 @@ type AppConfigFetchAction struct {
 
 func (a *AppConfigFetchAction) Run() error {
 	config, err := aws.GetConfig(context.Background(), a.AppName, a.ProfileName, a.Environment, a.Region)
+	if err != nil {
+		return err
+	}
 
-	action.SetOutput("config", config)
+	var sb strings.Builder
+
+	query, err := gojq.Parse(".")
+	if err != nil {
+		return err
+	}
+
+	iter := query.Run(config)
+
+	for {
+		v, ok := iter.Next()
+		if !ok {
+			break
+		}
+
+		if err, ok := v.(error); ok {
+			return err
+		}
+
+		sb.WriteString(fmt.Sprintf("%#v\n", v))
+	}
+	action.SetOutput("config", sb.String())
 
 	return err
 }

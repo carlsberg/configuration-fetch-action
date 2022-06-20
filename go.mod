@@ -7,6 +7,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/config v1.15.10
 	github.com/aws/aws-sdk-go-v2/service/appconfigdata v1.4.7
 	github.com/crqra/go-action v0.1.0
+	github.com/itchyny/gojq v0.12.8
 )
 
 require (
@@ -22,6 +23,7 @@ require (
 	github.com/golang/protobuf v1.4.2 // indirect
 	github.com/google/go-github/v42 v42.0.0 // indirect
 	github.com/google/go-querystring v1.1.0 // indirect
+	github.com/itchyny/timefmt-go v0.1.3 // indirect
 	golang.org/x/crypto v0.0.0-20210817164053-32db794688a5 // indirect
 	golang.org/x/net v0.0.0-20210226172049-e18ecbb05110 // indirect
 	golang.org/x/oauth2 v0.0.0-20211104180415-d3ed0bb246c8 // indirect
