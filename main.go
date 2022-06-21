@@ -50,6 +50,7 @@ func (a *AppConfigFetchAction) Run() error {
 
 		sb.WriteString(fmt.Sprintf("%#v\n", v))
 	}
+
 	action.SetOutput("config", sb.String())
 
 	return err
