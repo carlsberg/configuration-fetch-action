@@ -2,16 +2,28 @@ package main
 
 import (
 	"context"
+	"fmt"
+	"log"
+	"os"
 	"strings"
 
 	"github.com/Carlsberg/configuration-fetch-action/aws"
-	"github.com/crqra/go-action/pkg/action"
 )
 
 func main() {
-	if err := action.Execute(&AppConfigFetchAction{}); err != nil {
-		action.SetFailed(err, map[string]string{})
+	appName := os.Getenv("INPUT_APP_NAME")
+	profileName := os.Getenv("INPUT_PROFILE_NAME")
+	env := os.Getenv("INPUT_ENV")
+	region := os.Getenv("INPUT_REGION")
+
+	config, err := aws.GetConfig(context.Background(), appName, profileName, env, region)
+	if err != nil {
+		log.Fatal(err)
 	}
+
+	config = strings.Replace(config, "\n", "", -1)
+
+	fmt.Println(fmt.Sprintf("::set-output name=config::%v", config))
 }
 
 type AppConfigFetchAction struct {
@@ -28,7 +40,6 @@ func (a *AppConfigFetchAction) Run() error {
 	}
 
 	config = strings.Replace(config, "\n", "", -1)
-	action.SetOutput("config", config)
 
 	return err
 }
