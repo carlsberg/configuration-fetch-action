@@ -11,8 +11,8 @@ import (
 )
 
 func main() {
-	appName := os.Getenv("INPUT_APP_NAME")
-	profileName := os.Getenv("INPUT_PROFILE_NAME")
+	appName := os.Getenv("INPUT_APP-NAME")
+	profileName := os.Getenv("INPUT_PROFILE-NAME")
 	env := os.Getenv("INPUT_ENV")
 	region := os.Getenv("INPUT_REGION")
 
