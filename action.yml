@@ -15,9 +15,9 @@ inputs:
     required: true
     description: "AWS Region"
 outputs:
-  config:
-    description: "Config"
-    value: ${{ steps.action.outputs.config }}
+  absolute-path:
+    description: "Absolute Path"
+    value: ${{ steps.action.outputs.absolute-path }}
 
 runs:
   using: composite

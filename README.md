@@ -2,7 +2,7 @@
 
 > This project is powered by AWS SDK
 
-A Github Action that fetches configurations from AWS AppConfig files, powered by AWS SDK
+A Github Action that fetches configurations from AWS AppConfig files, powered by AWS SDK. It creates a file and sets the absolute path as a github action output for the file location.
 
 ## Requirements
 
@@ -26,7 +26,7 @@ A Github Action that fetches configurations from AWS AppConfig files, powered by
 
 | Output                                             | Description                                        |
 |------------------------------------------------------|-----------------------------------------------|
-| `config`  | AWS AppConfig application name input    |
+| `absolute-path`  | The location of the file with a copy of the requested configuration     |
 
 ### Example workflow
 

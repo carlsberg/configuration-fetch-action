@@ -29,7 +29,7 @@ func (a *AppConfigFetchAction) Run() error {
 		return err
 	}
 
-	filename := fmt.Sprintf("%v-%v-%v-%v.json", a.Region, a.AppName, a.Environment, a.ProfileName)
+	filename := fmt.Sprintf("%v/%v-%v-%v-%v.json", action.Context.EventPath, a.Region, a.AppName, a.Environment, a.ProfileName)
 
 	f, err := os.Create(filename)
 	if err != nil {
@@ -47,7 +47,8 @@ func (a *AppConfigFetchAction) Run() error {
 	if err != nil {
 		return err
 	}
-	action.SetOutput("config", absPath)
+
+	action.SetOutput("absolute-path", absPath)
 
 	return err
 }
