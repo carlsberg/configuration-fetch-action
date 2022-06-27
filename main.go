@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"strings"
 
 	"github.com/Carlsberg/configuration-fetch-action/aws"
@@ -26,9 +27,9 @@ func (a *AppConfigFetchAction) Run() error {
 	if err != nil {
 		return err
 	}
-	strings.Replace(config, "\n", "", -1)
 
-	action.SetOutput("config", config)
+	config = strings.Replace(config, "\n", "", -1)
+	fmt.Println(config)
 
 	return err
 }
