@@ -3,11 +3,10 @@ package main
 import (
 	"context"
 	"fmt"
-	"strings"
+	"os"
 
 	"github.com/Carlsberg/configuration-fetch-action/aws"
 	"github.com/crqra/go-action/pkg/action"
-	"github.com/itchyny/gojq"
 )
 
 func main() {
@@ -29,29 +28,19 @@ func (a *AppConfigFetchAction) Run() error {
 		return err
 	}
 
-	var sb strings.Builder
-
-	query, err := gojq.Parse(".")
+	filename := fmt.Sprintf("%v-%v-%v-%v.json", a.Region, a.AppName, a.Environment, a.ProfileName)
+	action.SetOutput("config", filename)
+	f, err := os.Create(filename)
 	if err != nil {
 		return err
 	}
 
-	iter := query.Run(config)
+	defer f.Close()
 
-	for {
-		v, ok := iter.Next()
-		if !ok {
-			break
-		}
-
-		if err, ok := v.(error); ok {
-			return err
-		}
-
-		sb.WriteString(fmt.Sprintf("%#v\n", v))
+	_, err = f.WriteString(config)
+	if err != nil {
+		return err
 	}
-
-	action.SetOutput("config", sb.String())
 
 	return err
 }
