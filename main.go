@@ -2,10 +2,12 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"strings"
 
 	"github.com/Carlsberg/configuration-fetch-action/aws"
 	"github.com/crqra/go-action/pkg/action"
+	"github.com/itchyny/gojq"
 )
 
 func main() {
@@ -27,8 +29,29 @@ func (a *AppConfigFetchAction) Run() error {
 		return err
 	}
 
-	parsedConfig := strings.Replace(config, "\n", "", -1)
-	action.SetOutput("config", parsedConfig)
+	var sb strings.Builder
+
+	query, err := gojq.Parse(".")
+	if err != nil {
+		return err
+	}
+
+	iter := query.Run(config)
+
+	for {
+		v, ok := iter.Next()
+		if !ok {
+			break
+		}
+
+		if err, ok := v.(error); ok {
+			return err
+		}
+
+		sb.WriteString(fmt.Sprintf("%#v\n", v))
+	}
+
+	action.SetOutput("config", sb.String())
 
 	return err
 }
