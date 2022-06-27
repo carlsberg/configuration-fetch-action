@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"os"
+	"path/filepath"
 
 	"github.com/Carlsberg/configuration-fetch-action/aws"
 	"github.com/crqra/go-action/pkg/action"
@@ -28,7 +29,7 @@ func (a *AppConfigFetchAction) Run() error {
 		return err
 	}
 
-	filename := fmt.Sprintf("./%v-%v-%v-%v.json", a.Region, a.AppName, a.Environment, a.ProfileName)
+	filename := fmt.Sprintf("%v-%v-%v-%v.json", a.Region, a.AppName, a.Environment, a.ProfileName)
 
 	f, err := os.Create(filename)
 	if err != nil {
@@ -42,7 +43,11 @@ func (a *AppConfigFetchAction) Run() error {
 		return err
 	}
 
-	action.SetOutput("config", filename)
+	absPath, err := filepath.Abs(filename)
+	if err != nil {
+		return err
+	}
+	action.SetOutput("config", absPath)
 
 	return err
 }
