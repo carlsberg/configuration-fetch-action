@@ -29,7 +29,7 @@ func (a *AppConfigFetchAction) Run() error {
 	}
 
 	filename := fmt.Sprintf("%v-%v-%v-%v.json", a.Region, a.AppName, a.Environment, a.ProfileName)
-	action.SetOutput("config", filename)
+
 	f, err := os.Create(filename)
 	if err != nil {
 		return err
@@ -41,6 +41,8 @@ func (a *AppConfigFetchAction) Run() error {
 	if err != nil {
 		return err
 	}
+
+	action.SetOutput("config", filename)
 
 	return err
 }
