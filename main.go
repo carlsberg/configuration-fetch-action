@@ -28,7 +28,7 @@ func (a *AppConfigFetchAction) Run() error {
 		return err
 	}
 
-	filename := fmt.Sprintf("%v-%v-%v-%v.json", a.Region, a.AppName, a.Environment, a.ProfileName)
+	filename := fmt.Sprintf("./%v-%v-%v-%v.json", a.Region, a.AppName, a.Environment, a.ProfileName)
 
 	f, err := os.Create(filename)
 	if err != nil {
