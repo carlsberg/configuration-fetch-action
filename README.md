@@ -26,7 +26,7 @@ A Github Action that fetches configurations from AWS AppConfig files, powered by
 
 | Output                                             | Description                                        |
 |------------------------------------------------------|-----------------------------------------------|
-| `absolute-path`  | The location of the file with a copy of the requested configuration     |
+| `path`  | The location of the file with a copy of the requested configuration     |
 
 ### Example workflow
 

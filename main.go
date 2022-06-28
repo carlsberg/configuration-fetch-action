@@ -48,7 +48,7 @@ func (a *AppConfigFetchAction) Run() error {
 		return err
 	}
 
-	action.SetOutput("absolute-path", absPath)
+	action.SetOutput("path", absPath)
 
 	return err
 }

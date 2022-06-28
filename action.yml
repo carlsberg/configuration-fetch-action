@@ -17,7 +17,7 @@ inputs:
 outputs:
   absolute-path:
     description: "Absolute Path"
-    value: ${{ steps.action.outputs.absolute-path }}
+    value: ${{ steps.action.outputs.path }}
 
 runs:
   using: composite
