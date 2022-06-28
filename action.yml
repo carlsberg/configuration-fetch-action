@@ -15,9 +15,9 @@ inputs:
     required: true
     description: "AWS Region"
 outputs:
-  config:
-    description: "Random number"
-    value: ${{ steps.action.outputs.config }}
+  path:
+    description: "Absolute Path"
+    value: ${{ steps.action.outputs.path }}
 
 runs:
   using: composite
