@@ -15,7 +15,7 @@ inputs:
     required: true
     description: "AWS Region"
 outputs:
-  absolute-path:
+  path:
     description: "Absolute Path"
     value: ${{ steps.action.outputs.path }}
 
